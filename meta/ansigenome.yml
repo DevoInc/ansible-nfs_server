@@ -17,5 +17,5 @@ ansigenome_info:
       github: ''
 
   synopsis: |
-    The `devo.nfs_server` Ansible role can be used to configure a NFS server
+    The `devoinc.nfs_server` Ansible role can be used to configure a NFS server
     on Debian or Ubuntu hosts.
