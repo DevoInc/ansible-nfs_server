@@ -13,7 +13,8 @@
 # Setup/install os speciffic tasks.
 - include_tasks: setup-{{ ansible_os_family }}.yml
   notify:
-    - 'Restart nfs services'
+    - Restart nfs server
+    - Restart nfs utils
 
 - name: Create /etc/exports.d/ directory
   file:
