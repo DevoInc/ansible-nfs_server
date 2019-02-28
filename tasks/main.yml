@@ -8,13 +8,14 @@
     name: "{{ nfs_packages }}"
     state: present
   notify:
-    - 'Restart nfs services'
+    - Restart nfs-kernel-server service
+    - Restart nfs-common service
 
 # Setup/install os speciffic tasks.
 - include_tasks: setup-{{ ansible_os_family }}.yml
   notify:
-    - Restart nfs server
-    - Restart nfs utils
+    - Restart nfs-kernel-server service
+    - Restart nfs-common service
 
 - name: Create /etc/exports.d/ directory
   file:
