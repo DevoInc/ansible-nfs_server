@@ -7,3 +7,9 @@
   with_items:
     - "{{ nfs_server_daemon }}"
     - "{{ nfs_utils_daemon }}"
+
+- name: Restart nfs server
+  service: name={{ nfs_server_daemon }} state=restarted
+
+- name: Restart nfs utils
+  service: name={{ nfs_utils_daemon }} state=restarted
