@@ -12,3 +12,4 @@
   service:
     name: "{{ nfs_utils_daemon }}"
     state: restarted
+  when: ansible_os_family != 'Debian'
