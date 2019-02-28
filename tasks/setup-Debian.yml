@@ -1,11 +1,4 @@
 ---
-- name: Ensure NFS utilities are installed.
-  apt:
-    name:
-      - nfs-common
-      - nfs-kernel-server
-    state: present
-
 - name: Configure NFS server
   template:
     src: '{{ item }}.j2'

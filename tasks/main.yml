@@ -3,7 +3,14 @@
 - name: Include OS-specific variables.
   include_vars: "{{ ansible_os_family }}.yml"
 
-# Setup/install tasks.
+- name: Ensure NFS utilities are installed.
+  package:
+    name: "{{ nfs_packages }}"
+    state: present
+  notify:
+    - 'Restart nfs services'
+
+# Setup/install os speciffic tasks.
 - include_tasks: setup-{{ ansible_os_family }}.yml
   notify:
     - 'Restart nfs services'

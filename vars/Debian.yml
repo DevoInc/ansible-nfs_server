@@ -1,3 +1,6 @@
 ---
 nfs_server_daemon: nfs-kernel-server
 nfs_utils_daemon: nfs-common
+nfs_packages:
+  - nfs-common
+  - nfs-kernel-server
