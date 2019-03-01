@@ -1,0 +1,6 @@
+---
+- name: Ensure rpcbind is running as configured.
+  service:
+    name: rpcbind
+    state: started
+    enabled: true

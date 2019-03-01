@@ -1,0 +1,15 @@
+---
+
+- name: reload nfs
+  command: 'exportfs -ra'
+
+- name: Restart nfs-kernel-server service
+  service:
+    name: "{{ nfs_server_daemon }}"
+    state: restarted
+
+- name: Restart nfs-common service
+  service:
+    name: "{{ nfs_utils_daemon }}"
+    state: restarted
+  when: ansible_os_family != 'Debian'

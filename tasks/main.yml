@@ -1,27 +1,21 @@
 ---
+# Include variables and define needed variables.
+- name: Include OS-specific variables.
+  include_vars: "{{ ansible_os_family }}.yml"
 
-- name: Install required packages
+- name: Ensure NFS utilities are installed.
   package:
-    name: '{{ item }}'
-    state: 'present'
-  with_flattened:
-    - '{{ nfs_server__base_packages }}'
-    - '{{ nfs_server__packages }}'
-
-- name: Configure NFS server
-  template:
-    src: '{{ item }}.j2'
-    dest: '/{{ item }}'
-    owner: 'root'
-    group: 'root'
-    mode: '0644'
-  with_items:
-    - 'etc/default/nfs-common'
-    - 'etc/default/nfs-kernel-server'
-    - 'etc/modprobe.d/nfs-server.conf'
+    name: "{{ nfs_packages }}"
+    state: present
   notify:
-    - 'Restart nfs-common service'
-    - 'Restart nfs-kernel-server service'
+    - Restart nfs-kernel-server service
+    - Restart nfs-common service
+
+# Setup/install os speciffic tasks.
+- include_tasks: setup-{{ ansible_os_family }}.yml
+  notify:
+    - Restart nfs-kernel-server service
+    - Restart nfs-common service
 
 - name: Create /etc/exports.d/ directory
   file:
@@ -60,4 +54,5 @@
     owner: 'root'
     group: 'root'
     mode: '0644'
-  notify: [ 'Reload NFS exports' ]
+  notify:
+    - 'reload nfs'

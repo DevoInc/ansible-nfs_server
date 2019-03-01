@@ -1,0 +1,12 @@
+---
+- name: Configure NFS server
+  template:
+    src: '{{ item }}.j2'
+    dest: '/{{ item }}'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+  with_items:
+    - 'etc/default/nfs-common'
+    - 'etc/default/nfs-kernel-server'
+    - 'etc/modprobe.d/nfs-server.conf'
