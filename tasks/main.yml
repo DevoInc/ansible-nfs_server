@@ -12,7 +12,7 @@
     - Restart nfs-common service
 
 # Setup/install os speciffic tasks.
-- include_tasks: setup-{{ ansible_os_family }}.yml
+- include_tasks: "setup-{{ ansible_os_family }}.yml"
   notify:
     - Restart nfs-kernel-server service
     - Restart nfs-common service
