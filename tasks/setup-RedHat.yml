@@ -4,3 +4,6 @@
     name: rpcbind
     state: started
     enabled: true
+  notify:
+    - "Restart nfs-kernel-server service"
+    - "Restart nfs-common service"

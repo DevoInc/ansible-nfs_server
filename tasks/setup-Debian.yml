@@ -10,3 +10,6 @@
     - 'etc/default/nfs-common'
     - 'etc/default/nfs-kernel-server'
     - 'etc/modprobe.d/nfs-server.conf'
+  notify:
+    - "Restart nfs-kernel-server service"
+    - "Restart nfs-common service"
